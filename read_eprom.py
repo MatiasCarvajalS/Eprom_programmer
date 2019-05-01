@@ -12,6 +12,6 @@ a = ser.read(size_eprom)       # read eprom completely
 ser.close()                    # close port
 
 print("Correct Reading")
-with open("eprom_data",'wb') as f: #write file, overwrite file
+with open("eprom_data/eprom_data",'wb') as f: #write file, overwrite file
     f.write(a)
 print("Correct Writing to file")
