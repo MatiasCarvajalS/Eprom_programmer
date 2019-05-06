@@ -1,8 +1,10 @@
 import serial
 import time
 size_eprom = 1048576
+size_eprom = 65536
 
-ser = serial.Serial('COM3')             # open serial port
+
+ser = serial.Serial('COM3', baudrate= 115200)             # open serial port
 print('Reading from', ser.name)         # check which port was really used
 print('Waiting 3 secs to correct initiate ARDUINO')
 time.sleep(3)
