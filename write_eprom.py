@@ -4,7 +4,6 @@ import time
 
 #Parameters
 size_eprom = 1048576
-size_eprom = 65536
 buffer_size = 64 #arduino buffer has 64 bytes only
 chunk = 0 #counter to write by chunks
 route_to_file = 'sandbox/testchunk2.smc'

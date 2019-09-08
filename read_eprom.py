@@ -1,9 +1,7 @@
 import serial
 import time
+
 size_eprom = 1048576
-size_eprom = 65536
-
-
 ser = serial.Serial('COM3', baudrate= 115200)             # open serial port
 print('Reading from', ser.name)         # check which port is used
 print('Waiting 3 secs to start ARDUINO') #if i not wait, sometimes ARDUINO works weird
