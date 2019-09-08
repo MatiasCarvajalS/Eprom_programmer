@@ -12,12 +12,12 @@
 #define E 2
 
 unsigned long size_eprom = 1048576; //number of adress memory of 27c801 eprom
-unsigned long chunk = 0; //contador
+unsigned long chunk = 0; //counter
 unsigned long address = 0;
 int buffer_size = 64; //arduino buffer size communication protocol
 byte buffer_size_bin = B111111; //arduino buffer size in binary
 int incomingByte = 0;
-byte byteDataFile; //data recibida del archivo en el script python
+byte byteDataFile; // data received from the script in python
 
 void setAddress(unsigned long address) {
 
@@ -50,7 +50,7 @@ void programAddress(unsigned long address, byte value){
 }
 
 void setup() {
-  // Setups iniciales
+  // initial setups
   digitalWrite(E, HIGH);
   pinMode(E,OUTPUT);
   Serial.begin(115200);
@@ -68,7 +68,7 @@ void setup() {
   pinMode(SHIFT_CLK, OUTPUT);
   pinMode(SHIFT_LATCH, OUTPUT);
   
-  //Un SR clear antes de la rutina porsiacaso
+  //a SR clear before the routine, just in case
   setAddress(0);
   delay(1000);
 
@@ -87,16 +87,16 @@ void loop() {
           incomingByte = Serial.read();
           if(incomingByte == 119){  //ASCII 'w' for write and do not make errors when execute python script
             
-            Serial.write(B01010100); //para la primera ejecucion, sino no entraria nunca al while de python
+            Serial.write(B01010100); //for the first execution, in other case the loop in python never execute
             while(chunk < size_eprom/buffer_size){
-              if(Serial.available() == buffer_size_bin){ //esperamos a que lleguen los 64 bytes para escribir la dat al EPROM
+              if(Serial.available() == buffer_size_bin){ //wait for the 64 bytes from the python script
                 for(int i = 0;i<buffer_size;i++){
                   byteDataFile = Serial.read();
                   address = chunk*buffer_size + i;
                   programAddress(address,byteDataFile);
                 }
-                chunk += 1; //aumento en 1 el chunk una vez ya escrito
-                Serial.write(B01010100); //se manda una T de true que termino de leerse el chunk para script de python
+                chunk += 1; 
+                Serial.write(B01010100); //send a T (TRUE) when the chunk was written
               }
             }
             

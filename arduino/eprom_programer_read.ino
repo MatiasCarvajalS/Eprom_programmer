@@ -39,7 +39,7 @@ void readAddress(unsigned long address){
 }
 
 void setup() {
-  // Setups iniciales
+  // initial setups
   digitalWrite(E, HIGH);
   pinMode(E,OUTPUT);
   Serial.begin(115200);
@@ -57,7 +57,7 @@ void setup() {
   pinMode(SHIFT_CLK, OUTPUT);
   pinMode(SHIFT_LATCH, OUTPUT);
   
-  //Un SR clear antes de la rutina porsiacaso
+  // a SR clear before the routine, just in case
   setAddress(0);
   delay(1000);
 
@@ -81,6 +81,5 @@ void loop() {
           }
           
         }
-  // put your main code here, to run repeatedly:
 
 }
