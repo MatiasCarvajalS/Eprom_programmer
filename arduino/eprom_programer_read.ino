@@ -65,7 +65,7 @@ void setup() {
 
 void loop() {
 
-        setAddress(1);
+        setAddress(1); //this is because i connected a led to know if is in writing or reading mode
         delay(500);
         setAddress(0);
         delay(500);
